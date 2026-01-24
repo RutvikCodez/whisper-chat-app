@@ -2,7 +2,7 @@ import { verifyToken } from "@clerk/express";
 import { Server as HTTPServer } from "http";
 import { Socket, Server as SocketServer } from "socket.io";
 import { User } from "../models/User";
-import type { meesageDataType, SocketWithUserId } from "../../types";
+import type { MessageDataType, SocketWithUserId } from "../../types";
 import { Chat } from "../models/Chat";
 import { Message } from "../models/Message";
 
@@ -13,7 +13,7 @@ export const initializeSocket = (httpServer: HTTPServer) => {
     "http://localhost:5173",
     "http://localhost:8081",
     process.env.FRONTEND_URL as string,
-  ];
+  ].filter(Boolean) as string[];
   const io = new SocketServer(httpServer, {
     cors: {
       origin: allowedOrigins,
@@ -56,7 +56,7 @@ export const initializeSocket = (httpServer: HTTPServer) => {
       socket.leave(`chat:${chatId}`);
     });
 
-    socket.on("sent-message", async (data: meesageDataType) => {
+    socket.on("sent-message", async (data: MessageDataType) => {
       try {
         const { chatId, text } = data;
         const chat = await Chat.findOne({

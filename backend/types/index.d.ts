@@ -31,7 +31,7 @@ type IUser = Document & {
 
 type SocketWithUserId = Socket & { userId: string };
 
-type meesageDataType = {
+type MessageDataType = {
     chatId: string;
     text: string;
 }
