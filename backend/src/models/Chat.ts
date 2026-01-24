@@ -1,12 +1,5 @@
 import mongoose, { Schema, type Document } from "mongoose";
-
-type IChat = Document & {
-  participants: mongoose.Types.ObjectId[];
-  lastmessage?: mongoose.Types.ObjectId;
-  lastMessageAt: Date;
-  createdAt: Date;
-  updatedAt: Date;
-};
+import type { IChat } from "../../types";
 
 const chatSchema = new Schema<IChat>(
   {

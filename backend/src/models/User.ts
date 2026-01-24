@@ -1,13 +1,5 @@
 import mongoose, { Schema, type Document } from "mongoose";
-
-type IUser = Document & {
-  clerkId: string;
-  name: string;
-  email: string;
-  avatar: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
+import type { IUser } from "../../types";
 
 const userSchema = new Schema<IUser>({
   clerkId: {

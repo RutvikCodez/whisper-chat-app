@@ -1,12 +1,5 @@
-import mongoose, { Schema, type Document } from "mongoose";
-
-type IMessage = Document & {
-  chat: mongoose.Types.ObjectId;
-  sender: mongoose.Types.ObjectId;
-  text?: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
+import mongoose, { Schema } from "mongoose";
+import type { IMessage } from "../../types";
 
 const messageSchema = new Schema<IMessage>(
   {
