@@ -9,6 +9,8 @@ export const getUsers = async (
 ) => {
   try {
     const userId = req.userId;
+    if (!userId) return res.status(401).json({ error: "Unauthorized" });
+
     const users = await User.find({ _id: { $ne: userId } })
       .select("name email avatar")
       .limit(50);
