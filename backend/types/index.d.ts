@@ -1,5 +1,6 @@
 import type { Request } from "express";
 import type { Document } from "mongoose";
+import type { Socket } from "socket.io";
 
 type AuthRequest = Request & { userId?: string };
 
@@ -27,3 +28,10 @@ type IUser = Document & {
   createdAt: Date;
   updatedAt: Date;
 };
+
+type SocketWithUserId = Socket & { userId: string };
+
+type meesageDataType = {
+    chatId: string;
+    text: string;
+}
