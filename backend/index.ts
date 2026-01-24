@@ -1,4 +1,4 @@
-import "dotenv/config";  // add this at the very top of index.ts
+import "dotenv/config"; 
 import app from "./src/app";
 import { connectDB } from "./src/config/database";
 
@@ -8,4 +8,6 @@ connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
+}).catch((error) => {
+  console.error("Failed to start server:", error);
 });
