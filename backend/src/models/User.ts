@@ -4,7 +4,7 @@ type IUser = Document & {
   clerkId: string;
   name: string;
   email: string;
-  avatar?: string;
+  avatar: string;
   createdAt: Date;
   updatedAt: Date;
 };
