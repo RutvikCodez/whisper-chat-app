@@ -45,6 +45,9 @@ const NewChatScreen = () => {
         });
        }, 100);
       },
+      onError: (error) => {
+       console.error("Failed to create chat:", error);
+     },
     });
   };
   return (
@@ -106,9 +109,9 @@ const NewChatScreen = () => {
                 <Text className="text-muted-foreground text-xs mb-3">
                   USERS
                 </Text>
-                {users.map((user, index) => (
+                {users.map((user) => (
                   <UserItem
-                    key={index}
+                    key={user._id}
                     {...user}
                     isOnline={true}
                     onPress={() => handleUserSelect(user)}
