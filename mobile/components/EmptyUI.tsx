@@ -35,7 +35,12 @@ const EmptyUI = ({
         ) : null}
       </View>
       {buttonLabel && onPressButton ? (
-        <Pressable className="bg-primary px-6 py-3 rounded-full" onPress={onPressButton}>
+        <Pressable
+          className="bg-primary px-6 py-3 rounded-full active:opacity-70"
+          onPress={onPressButton}
+          accessibilityRole="button"
+          accessibilityLabel={buttonLabel}
+        >
           <Text className="text-surface-dark font-semibold">{buttonLabel}</Text>
         </Pressable>
       ) : null}

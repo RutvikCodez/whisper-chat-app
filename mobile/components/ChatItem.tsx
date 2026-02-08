@@ -56,6 +56,7 @@ const ChatItem = ({ chat, onPress }: { chat: Chat; onPress: () => void }) => {
                   ? "text-foreground font-medium"
                   : "text-subtle-foreground",
               )}
+              numberOfLines={1}
             >
                 {chat.lastMessage?.text || "No message yet"}
             </Text>
