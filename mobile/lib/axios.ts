@@ -1,9 +1,9 @@
 import { useAuth } from "@clerk/clerk-expo";
 import axios from "axios";
 import { useEffect } from "react";
-import * as Sentry from "@sentry/react-native";
+  import * as Sentry from "@sentry/react-native";
 
-const API_URL = "http://10.232.51.209:3000/api";
+const API_URL = process.env.EXPO_PUBLIC_API_URL || "http://localhost:3000/api";
 const api = axios.create({
   baseURL: API_URL,
   headers: {
@@ -45,9 +45,8 @@ export const useApi = () => {
     );
     return () => {
       api.interceptors.request.eject(requestInterceptor);
-      api.interceptors.request.eject(responseInterceptor);
-    };
-  }, [getToken]);
+      api.interceptors.response.eject(responseInterceptor);
+    };  }, [getToken]);
 
   return api;
 };
