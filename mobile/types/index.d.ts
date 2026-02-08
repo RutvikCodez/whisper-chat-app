@@ -5,12 +5,6 @@ type User = {
   avatar: string;
 };
 
-type MessageSender = {
-  _id: string;
-  name: string;
-  email: string;
-  avatar: string;
-};
 
 type Message = {
   _id: string;

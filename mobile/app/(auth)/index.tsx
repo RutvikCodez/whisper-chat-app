@@ -16,11 +16,10 @@ const AuthScreen = () => {
         <LinearGradient
           colors={["#0D0D0F", "#1A1A2E", "#16213E", "#0D0D0F"]}
           style={{ position: "absolute", width: "100%", height: "100%" }}
-          start={{x:0, y:0}}
-          end={{x:1, y:1}}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
         />
       </View>
-      <View className="absolute inset-0 overflow-hidden"></View>
       <SafeAreaView className="flex-1">
         <View className="items-center">
           <Image

@@ -16,6 +16,7 @@ const MenuItemCard = ({
         "flex-row items-center px-4 py-3.5 active:bg-surface-light gap-3",
         !isLast && "border-b border-surface-light",
       )}
+      onPress={() => console.log("Button Pressed")}
     >
       <View
         className="size-9 rounded-xl items-center justify-center"

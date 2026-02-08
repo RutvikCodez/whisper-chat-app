@@ -24,7 +24,10 @@ const ProfileTab = () => {
                 source={user?.imageUrl}
                 style={{ width: 100, height: 100, borderRadius: 999 }}
               />
-              <Pressable className="absolute bottom-1 right-1 size-8 bg-primary rounded-full items-center justify-center border-2 border-surface-dark">
+              <Pressable
+                className="absolute bottom-1 right-1 size-8 bg-primary rounded-full items-center justify-center border-2 border-surface-dark"
+                onPress={() => console.log("Button Pressed")}
+              >
                 <Ionicons name="camera" size={16} color={"#0D0D0F"} />
               </Pressable>
             </View>
@@ -33,7 +36,7 @@ const ProfileTab = () => {
                 {user?.firstName} {user?.lastName}
               </Text>
               <Text className="text-muted-foreground">
-                {user?.emailAddresses[0].emailAddress}
+                {user?.emailAddresses?.[0].emailAddress}
               </Text>
             </View>
           </View>
@@ -61,7 +64,7 @@ const ProfileTab = () => {
         </View>
       ))}
       <Pressable
-        className="mx-5 mt-8 bg-red-500/10 rounded-2xl py-4 items-center active:opacity-70 border-collapse border-red-500/20"
+        className="mx-5 mt-8 bg-red-500/10 rounded-2xl py-4 items-center active:opacity-70 border-red-500/20"
         onPress={() => signOut()}
       >
         <View className="flex-row items-center gap-2">
