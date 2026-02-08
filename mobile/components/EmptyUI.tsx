@@ -12,7 +12,7 @@ type EmptyUIProps = {
   onPressButton?: () => void;
 };
 
-const EmptyUI = ({
+const   EmptyUI = ({
   title,
   buttonLabel,
   iconColor = "#6B6B70",

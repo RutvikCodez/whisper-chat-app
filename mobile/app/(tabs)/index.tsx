@@ -47,7 +47,7 @@ const ChatsTab = () => {
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={{
           paddingHorizontal: 20,
-          paddingTop: 16,
+          paddingTop: 40,
           paddingBottom: 24,
         }}
         ListHeaderComponent={<Header />}

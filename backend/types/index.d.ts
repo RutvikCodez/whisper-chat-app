@@ -32,6 +32,8 @@ type IUser = Document & {
 type SocketWithUserId = Socket & { userId: string };
 
 type MessageDataType = {
-    chatId: string;
-    text: string;
-}
+  chatId: string;
+  text: string;
+};
+
+type TypingProps = { chatId: string; isTyping: boolean };

@@ -10,7 +10,6 @@ type UserItemProps = User & {
   onPress: () => void;
 };
 
-
 type Message = {
   _id: string;
   chat: string;
@@ -50,3 +49,16 @@ type AnimatedOrbProps = {
   initialY: number;
   duration: number;
 };
+
+type TypingEventProps = { userId: string; chatId: string; isTyping: boolean };
+
+type ChatProps = {
+  id: string;
+  participantId: string;
+  name: string;
+  avatar: string;
+};
+
+type MessageBubbleProps = Message & {
+  isFromMe: boolean
+}

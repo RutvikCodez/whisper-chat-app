@@ -2,11 +2,11 @@ import { verifyToken } from "@clerk/express";
 import { Server as HTTPServer } from "http";
 import { Socket, Server as SocketServer } from "socket.io";
 import { User } from "../models/User";
-import type { MessageDataType, SocketWithUserId } from "../../types";
+import type { MessageDataType, SocketWithUserId, TypingProps } from "../../types";
 import { Chat } from "../models/Chat";
 import { Message } from "../models/Message";
 
-const olineUsers: Map<string, string> = new Map();
+const onlineUsers: Map<string, string> = new Map();
 
 export const initializeSocket = (httpServer: HTTPServer) => {
   const allowedOrigins = [
@@ -40,9 +40,9 @@ export const initializeSocket = (httpServer: HTTPServer) => {
   io.on("connection", (socket) => {
     const userId = (socket as SocketWithUserId).userId;
 
-    socket.emit("online-users", { userIds: Array.from(olineUsers.keys()) });
+    socket.emit("online-users", { userIds: Array.from(onlineUsers.keys()) });
 
-    olineUsers.set(userId, socket.id);
+    onlineUsers.set(userId, socket.id);
 
     socket.broadcast.emit("user-online", { userId });
 
@@ -56,7 +56,7 @@ export const initializeSocket = (httpServer: HTTPServer) => {
       socket.leave(`chat:${chatId}`);
     });
 
-    socket.on("sent-message", async (data: MessageDataType) => {
+    socket.on("send-message", async (data: MessageDataType) => {
       try {
         const { chatId, text } = data;
         const chat = await Chat.findOne({
@@ -84,10 +84,28 @@ export const initializeSocket = (httpServer: HTTPServer) => {
       }
     });
 
-    socket.on("typing", async (data) => {});
+    socket.on("typing", async ({chatId,isTyping}: TypingProps) => {
+      const typingPayload = {
+        userId,
+        chatId: chatId,
+        isTyping: isTyping
+      }
+      socket.to(`chat:${chatId}`).emit("typing", typingPayload)
+      try {
+        const chat = await Chat.findById(chatId)
+        if (chat) {
+          const otherParticipantId = chat.participants.find((p: any) =>  p.toString() !== userId)
+          if (otherParticipantId) {
+            socket.to(`chat:${otherParticipantId}`).emit("typing", typingPayload)
+          }
+        }
+      } catch (error) {
+        
+      }
+    });
 
     socket.on("disconnect", () => {
-      olineUsers.delete(userId);
+      onlineUsers.delete(userId);
       socket.broadcast.emit("user-offline", { userId });
     });
   });

@@ -13,13 +13,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { useUsers } from "@/hooks/useUsers";
 import { useGetOrCreateChat } from "@/hooks/useChats";
 import UserItem from "@/components/UserItem";
+import { useSocketStore } from "@/lib/socket";
 
 const NewChatScreen = () => {
   const [searchQuery, setsearchQuery] = useState("");
   const { data: allUsers, isLoading } = useUsers();
   const { mutate: getOrCreateChat, isPending: isCreatingChat } =
     useGetOrCreateChat();
-
+const {onlineUsers} = useSocketStore()
   const users = allUsers?.filter((u) => {
     if (!searchQuery.trim()) return true;
     const query = searchQuery.toLowerCase();
@@ -113,7 +114,7 @@ const NewChatScreen = () => {
                   <UserItem
                     key={user._id}
                     {...user}
-                    isOnline={true}
+                    isOnline={onlineUsers.has(user._id)}
                     onPress={() => handleUserSelect(user)}
                   />
                 ))}

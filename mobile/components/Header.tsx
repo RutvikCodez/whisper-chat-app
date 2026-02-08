@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 const Header = () => {
   const router = useRouter();
   return (
-    <View className="px-5 pt-2 pb-4">
+    <View className="pt-2 pb-4">
       <View className="flex-row items-center justify-between">
         <Text className="text-2xl font-bold text-foreground">Chats</Text>
         <Pressable
