@@ -21,6 +21,8 @@ const useSocialAuth = () => {
         "Error",
         `Failed to sign in with ${provider}. Please try again.`,
       );
+    } finally {
+      setLoadingStrategy(null)
     }
   };
 
