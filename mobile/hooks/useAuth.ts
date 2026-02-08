@@ -25,5 +25,6 @@ export const useCurrentUser = () => {
       });
       return data;
     },
+    retry: false
   });
 };

@@ -96,7 +96,7 @@ export const initializeSocket = (httpServer: HTTPServer) => {
         if (chat) {
           const otherParticipantId = chat.participants.find((p: any) =>  p.toString() !== userId)
           if (otherParticipantId) {
-            socket.to(`chat:${otherParticipantId}`).emit("typing", typingPayload)
+            socket.to(`user:${otherParticipantId}`).emit("typing", typingPayload)
           }
         }
       } catch (error) {

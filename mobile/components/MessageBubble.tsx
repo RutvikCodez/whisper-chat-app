@@ -8,6 +8,9 @@ const MessageBubble = ({ isFromMe, text }: MessageBubbleProps) => {
       className={clsx("flex-row", isFromMe ? "justify-end" : "justify-start")}
     >
       <View
+        accessible={true}
+        accessibilityRole="text"
+        accessibilityLabel={isFromMe ? `You said: ${text}` : text}
         className={clsx(
           "max-w-[80%] px-3 py-2 rounded-2xl",
           isFromMe

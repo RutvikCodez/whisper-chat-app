@@ -60,5 +60,5 @@ type ChatProps = {
 };
 
 type MessageBubbleProps = Message & {
-  isFromMe: boolean
+  isFromMe: boolean;
 }

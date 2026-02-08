@@ -49,6 +49,9 @@ const ChatDetailScreen = () => {
     if (chatId && isConnected) joinChat(chatId);
     return () => {
       if (chatId) leaveChat(chatId);
+       if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
     };
   }, [chatId, isConnected, joinChat, leaveChat]);
 

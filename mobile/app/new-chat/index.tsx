@@ -20,7 +20,7 @@ const NewChatScreen = () => {
   const { data: allUsers, isLoading } = useUsers();
   const { mutate: getOrCreateChat, isPending: isCreatingChat } =
     useGetOrCreateChat();
-const {onlineUsers} = useSocketStore()
+  const { onlineUsers } = useSocketStore();
   const users = allUsers?.filter((u) => {
     if (!searchQuery.trim()) return true;
     const query = searchQuery.toLowerCase();
@@ -33,22 +33,22 @@ const {onlineUsers} = useSocketStore()
   const handleUserSelect = (user: User) => {
     getOrCreateChat(user._id, {
       onSuccess: (chat) => {
-        router.dismiss()
-       setTimeout(() => {
-         router.push({
-          pathname: "/chat/[id]",
-          params: {
-            id: chat._id,
-            participantId: chat.participant._id,
-            name: chat.participant.name,
-            avatar: chat.participant.avatar,
-          },
-        });
-       }, 100);
+        router.dismiss();
+        setTimeout(() => {
+          router.push({
+            pathname: "/chat/[id]",
+            params: {
+              id: chat._id,
+              participantId: chat.participant._id,
+              name: chat.participant.name,
+              avatar: chat.participant.avatar,
+            },
+          });
+        }, 100);
       },
       onError: (error) => {
-       console.error("Failed to create chat:", error);
-     },
+        console.error("Failed to create chat:", error);
+      },
     });
   };
   return (

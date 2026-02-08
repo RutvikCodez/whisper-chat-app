@@ -20,7 +20,8 @@ type SocketState = {
   sendTyping: (chatId: string, isTyping: boolean) => void;
 };
 
-const SOCKET_URL = "http://10.201.88.209:3000";
+const SOCKET_URL =
+  process.env.EXPO_PUBLIC_SOCKET_URL || "http://localhost:3000";
 
 export const useSocketStore = create<SocketState>((set, get) => ({
   socket: null,
@@ -70,7 +71,7 @@ export const useSocketStore = create<SocketState>((set, get) => ({
 
     socket.on("socket-error", (error: { message: string }) => {
       console.log("Socket error:", error.message);
-      Sentry.logger.error("Socket error occured", { message: error.message });
+      Sentry.logger.error("Socket error occurred", { message: error.message });
     });
 
     socket.on("new-message", (message: Message) => {
@@ -122,8 +123,8 @@ export const useSocketStore = create<SocketState>((set, get) => ({
     socket.on("typing", ({ userId, chatId, isTyping }: TypingEventProps) => {
       set((state) => {
         const typingUsers = new Map(state.typingUsers);
-        if(isTyping) typingUsers.set(chatId, userId);
-        else typingUsers.delete(chatId)
+        if (isTyping) typingUsers.set(chatId, userId);
+        else typingUsers.delete(chatId);
         return { typingUsers: typingUsers };
       });
     });
@@ -186,7 +187,7 @@ export const useSocketStore = create<SocketState>((set, get) => ({
     });
 
     socket.emit("send-message", { chatId, text });
-    Sentry.logger.info("Message sent successfully", {
+    Sentry.logger.info("Message emitted to socket", {
       chatId,
       messageLength: text.length,
     });
