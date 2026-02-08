@@ -5,6 +5,11 @@ type User = {
   avatar: string;
 };
 
+type UserItemProps = User & {
+  isOnline: boolean;
+  onPress: () => void;
+};
+
 
 type Message = {
   _id: string;

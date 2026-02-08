@@ -35,7 +35,6 @@ Sentry.init({
 
 const queryClient = new QueryClient();
 
-
 export default Sentry.wrap(function RootLayout() {
   const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
   if (!publishableKey) {
@@ -58,6 +57,14 @@ export default Sentry.wrap(function RootLayout() {
         >
           <Stack.Screen name="(auth)" options={{ animation: "fade" }} />
           <Stack.Screen name="(tabs)" options={{ animation: "fade" }} />
+          <Stack.Screen
+            name="new-chat"
+            options={{
+              animation: "slide_from_bottom",
+              presentation: "modal",
+              gestureEnabled: true,
+            }}
+          />
         </Stack>
       </QueryClientProvider>
     </ClerkProvider>

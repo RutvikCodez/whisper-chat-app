@@ -8,6 +8,7 @@ import { useRouter } from "expo-router";
 
 const ChatsTab = () => {
   const { data: chats, isLoading, error } = useChats();
+  
   const router = useRouter();
   if (isLoading) {
     return (
@@ -55,7 +56,7 @@ const ChatsTab = () => {
             title="No chats yet"
             subtitle="Start a conversation!"
             buttonLabel="New Chat"
-            onPressButton={() => console.log("Button presses")}
+            onPressButton={() => router.push("/new-chat" as any)}
           />
         }
       />
