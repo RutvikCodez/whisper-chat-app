@@ -3,9 +3,11 @@ import HomePage from "./pages/HomePage";
 import ChatPage from "./pages/ChatPage";
 import { useAuth } from "@clerk/clerk-react";
 import PageLoader from "./components/PageLoader";
+import useUserSync from "./hooks/useUserSync";
 
 function App() {
   const { isLoaded, isSignedIn } = useAuth();
+  useUserSync()
   if (!isLoaded) return <PageLoader />;
   return (
     <Routes>
