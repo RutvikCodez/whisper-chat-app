@@ -38,17 +38,17 @@ export const useSocketStore = create<SocketState>((set, get) => ({
     if (existingSocket) existingSocket.disconnect();
     const socket = io(SOCKET_URL, { auth: { token } });
 
-    socket.on("connect", () => {
-      console.log("Socket connected, id:", socket.id);
-      Sentry.logger.info("Socket Connected", { socketId: socket.id });
-      set({ isConnected: true });
-    });
+      socket.on("connect", () => {
+        console.log("Socket connected, id:", socket.id);
+        Sentry.logger.info("Socket Connected", { socketId: socket.id });
+        set({ isConnected: true });
+      });
 
-    socket.on("disconnect", () => {
-      console.log("Socket disconnected, id:", socket.id);
-      Sentry.logger.info("Socket Disconnected", { socketId: socket.id });
-      set({ isConnected: false });
-    });
+      socket.on("disconnect", () => {
+        console.log("Socket disconnected, id:", socket.id);
+        Sentry.logger.info("Socket Disconnected", { socketId: socket.id });
+        set({ isConnected: false });
+      });
 
     socket.on("online-users", ({ userIds }: { userIds: string[] }) => {
       console.log("Received online-users", userIds);
