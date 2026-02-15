@@ -75,7 +75,6 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
 
       queryClient.setQueryData<Message[]>(["messages", message.chat], (old) => {
         if (!old) return [message];
-        // remove any optimistic messages (temp IDs) and add the real one
         const filtered = old.filter((m) => !m._id.startsWith("temp-"));
         const exists = filtered.some((m) => m._id === message._id);
         return exists ? filtered : [...filtered, message];
@@ -99,7 +98,6 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
         });
       });
 
-      // clear typing indicator when message received
       set((state) => {
         const typingUsers = new Map(state.typingUsers);
         typingUsers.delete(message.chat);
@@ -134,7 +132,6 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
     const { socket, queryClient } = get();
     if (!socket?.connected || !queryClient) return;
 
-    // create optimistic message
     const tempId = `temp-${Date.now()}`;
     const optimisticMessage = {
       _id: tempId,
@@ -142,18 +139,19 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
       sender: currentUser,
       text,
       createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     };
 
-    // add optimistic message immediately
-    queryClient.setQueryData<Message[]>(["messages", chatId], (old) => {
-      if (!old) return [optimisticMessage];
-      return [...old, optimisticMessage];
-    });
+    queryClient.setQueryData<Message[]>(
+      ["messages", chatId],
+      (old: Message[] | undefined) => {
+        if (!old) return [optimisticMessage];
+        return [...old, optimisticMessage];
+      },
+    );
 
-    // emit to server
     socket.emit("send-message", { chatId, text });
 
-    // handle errors - remove optimistic message if send fails
     socket.once("socket-error", () => {
       queryClient.setQueryData<Message[]>(["messages", chatId], (old) => {
         if (!old) return [];
