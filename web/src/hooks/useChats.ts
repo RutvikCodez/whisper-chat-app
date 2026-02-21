@@ -4,7 +4,7 @@ import api from "../lib/axios";
 
 export const useChats = () => {
   const { getToken } = useAuth();
-  return useQuery({
+  return useQuery<Chat[]>({
     queryKey: ["chats"],
     queryFn: async () => {
       const token = await getToken();

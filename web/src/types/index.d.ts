@@ -24,7 +24,37 @@ type User = {
 type Chat = {
   _id: string;
   participant: MessageSender;
-  lastMessage: ChatLastMessage | null;
+  lastmessage: ChatLastMessage | null;
   lastMessageAt: string;
   createdAt: string;
+};
+
+type ChatListItemProps = {
+  chat: Chat;
+  isActive: boolean;
+  onClick: () => void;
+};
+
+type ChatHeaderProps = {
+  participant: MessageSender;
+  chatId: string;
+};
+
+type MessageBubbleProps = {
+  message: Message;
+  currentUser: User;
+};
+
+type ChatInputProps = {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onSubmit:(e: React.FormEvent<HTMLFormElement>) => void
+  disabled: boolean;
+};
+
+type NewChatModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  onStartChat: (participantId: string) => void;
+  isPending: boolean;
 };

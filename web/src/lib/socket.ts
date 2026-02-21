@@ -150,6 +150,26 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
       },
     );
 
+    queryClient.setQueryData<Chat[]>(["chats"], (oldChats) => {
+      if (!oldChats) return [];
+
+      return oldChats.map((chat) => {
+        if (chat._id === chatId) {
+          return {
+            ...chat,
+            lastMessage: {
+              _id: tempId,
+              text,
+              sender: currentUser,
+              createdAt: new Date().toISOString(),
+            },
+            lastMessageAt: new Date().toISOString(),
+          };
+        }
+        return chat;
+      });
+    });
+
     socket.emit("send-message", { chatId, text });
 
     socket.once("socket-error", () => {
