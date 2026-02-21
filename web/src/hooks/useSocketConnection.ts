@@ -9,14 +9,25 @@ export const useSocketConnection = (activeChatId?: string) => {
   const { socket, connect, disconnect, joinChat, leaveChat } = useSocketStore();
 
   useEffect(() => {
+    let cancelled = false;
     if (!isSignedIn) {
       disconnect();
       return;
     }
 
-    getToken().then((token) => {
-      if (token) connect(token, queryClient);
-    });
+    getToken()
+      .then((token) => {
+        if (!cancelled && token) {
+          connect(token, queryClient);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to get auth token:", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, [connect, disconnect, getToken, isSignedIn, queryClient]);
 
   useEffect(() => {

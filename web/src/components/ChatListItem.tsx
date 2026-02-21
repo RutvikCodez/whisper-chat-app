@@ -11,8 +11,7 @@ export function ChatListItem({
   const { onlineUsers, typingUsers } = useSocketStore();
   const isOnline = onlineUsers.has(chat.participant?._id);
   const isTyping = !!typingUsers.get(chat._id);
-    console.log(chat.lastmessage?.text);
-    
+
   return (
     <button
       onClick={onClick}
@@ -24,9 +23,10 @@ export function ChatListItem({
     >
       <div className="relative">
         <img
-          src={chat.participant?.avatar}
+          src={chat.participant?.avatar || "/default-avatar.png"}
+          alt={`${chat.participant?.name || "Unknown"}'s avatar`}
           className="w-11 h-11 rounded-full bg-base-300/40"
-        />
+        />{" "}
         {isOnline && (
           <span className="absolute bottom-0 right-0 w-3 h-3 bg-success rounded-full border-2 border-base-200" />
         )}

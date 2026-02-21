@@ -7,9 +7,18 @@ export function ChatHeader({ participant, chatId, ...props }: ChatHeaderProps) {
   const isTyping = typingUserId && typingUserId === participant?._id;
 
   return (
-    <div className="h-16 px-6 border-b border-base-300 flex items-center gap-4 bg-base-200/80" {...props}>
+    <div
+      className="h-16 px-6 border-b border-base-300 flex items-center gap-4 bg-base-200/80"
+      {...props}
+    >
       <div className="relative">
-        <img src={participant?.avatar} className="w-10 h-10 rounded-full bg-base-300/40" alt="" />
+        <img
+          src={participant?.avatar}
+          className="w-10 h-10 rounded-full bg-base-300/40"
+          alt={
+            participant?.name ? `${participant.name}'s avatar` : "User avatar"
+          }
+        />{" "}
         {isOnline && (
           <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-success rounded-full border-2 border-base-200" />
         )}

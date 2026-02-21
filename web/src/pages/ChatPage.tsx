@@ -127,7 +127,7 @@ const ChatPage = () => {
               participant={activeChat.participant}
               chatId={activeChatId}
             />
-            <div className="flex-1 overflow-y-auto p-6  flex flex-col gap-4">
+            <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-4">
               {messagesLoading && (
                 <div className="flex items-center justify-center h-full">
                   <span className="loading loading-spinner loading-md text-amber-400" />

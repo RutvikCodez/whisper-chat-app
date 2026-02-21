@@ -13,13 +13,6 @@ export function MessageBubble({
       className={clsx("flex", isMe ? "justify-end" : "justify-start")}
       {...props}
     >
-      {/* <div
-        className={`max-w-md px-4 py-2.5 rounded-2xl ${
-          isMe
-            ? "bg-linear-to-r from-amber-500 to-orange-500 text-primary-content"
-            : "bg-base-300/40 text-base-content"
-        }`}
-      > */}
       <div
         className={clsx(
           "max-w-md px-4 py-2.5 rounded-2xl flex gap-3 items-center",
@@ -31,7 +24,7 @@ export function MessageBubble({
         <p className="text-sm">{message.text}</p>
         <p
           className={clsx(
-            "text-xs mt-2",
+            "text-xs",
             isMe ? "text-primary-content/80" : "text-base-content/70",
           )}
         >

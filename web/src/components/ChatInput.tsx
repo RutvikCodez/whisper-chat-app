@@ -14,8 +14,8 @@ export function ChatInput({ value, onChange, onSubmit, disabled, ...props }: Cha
         <button
           type="submit"
           disabled={disabled}
-          className="btn rounded-xl bg-linear-to-r from-amber-500 to-orange-500 border-none disabled:btn-disabled"
-        >
+          aria-label="Send message"
+          className="btn rounded-xl bg-linear-to-r from-amber-500 to-orange-500 border-none disabled:btn-disabled"        >
           <SendIcon className="size-5" />
         </button>
       </div>

@@ -47,8 +47,8 @@ type MessageBubbleProps = {
 
 type ChatInputProps = {
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onSubmit:(e: React.FormEvent<HTMLFormElement>) => void
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit:(e: React.FormEvent<HTMLFormElement>) => void;
   disabled: boolean;
 };
 
